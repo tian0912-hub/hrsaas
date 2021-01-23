@@ -106,6 +106,7 @@ export default {
       })
     },
     handleLogin() {
+      console.log(Date.now())
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           try {
