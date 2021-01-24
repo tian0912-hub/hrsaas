@@ -115,3 +115,20 @@ export function param2Obj(url) {
   })
   return obj
 }
+/*
+封装处理组织架构返回数据为树形数据的函数，递归方法
+*/
+export function tranListToTreeData(list, rootValue) {
+  var arr = []
+  list.forEach(item => {
+    if (item.pid === rootValue) {
+      // 这里已经找到一级节点，将它的ID作为新的rootvalue去找其子节点
+      const children = tranListToTreeData(list, item.id)
+      if (children.length > 0) {
+        item.children = children
+      }
+      arr.push(item)
+    }
+  })
+  return arr
+}
