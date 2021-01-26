@@ -14,10 +14,29 @@ export function deleteNode(id) {
   })
 }
 // 封装添加部门
-export function addDepartmeng(partInfo) {
+export function addDepartment(data) {
   return request({
     url: '/company/department',
     method: 'post',
-    Body: partInfo
+    data
+  })
+}
+// 封装获取员工简单列表
+export function getEmployeeSimple() {
+  return request({
+    url: '/sys/user/simple'
+  })
+}
+// 封装根据ID查询部门详细信息
+export function getParInfo(id) {
+  return request({
+    url: `/company/department/${id}`
+  })
+}
+// 封装根据ID修改部门详细信息
+export function editParInfo(id) {
+  return request({
+    url: `/company/department/${id}`,
+    method: 'put'
   })
 }

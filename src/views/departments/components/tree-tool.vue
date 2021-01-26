@@ -39,7 +39,7 @@ export default {
     handleCommand(command) {
       if (command === 'add') {
         // 添加功能直接做到主页面上
-        this.$emit('addDepartment', this.treeList.id)
+        this.$emit('addDepartment', this.treeList)
         // 执行添加操作
       } else if (command === 'del') {
         // 执行删除操作
@@ -54,6 +54,7 @@ export default {
         })
       } else {
         // 执行编辑操作
+        this.$emit('editDepartment', this.treeList)
       }
     }
   }
