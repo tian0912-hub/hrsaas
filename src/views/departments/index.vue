@@ -71,7 +71,7 @@ export default {
     // 监听添加部门的点击事件
     addDepartment(treeList) {
       this.addDepartdialog = true
-      console.log(treeList)
+      // console.log(treeList)
       this.treeList = treeList
     },
     editDepartment(treeList) {

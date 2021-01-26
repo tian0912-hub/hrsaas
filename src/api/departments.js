@@ -34,9 +34,10 @@ export function getParInfo(id) {
   })
 }
 // 封装根据ID修改部门详细信息
-export function editParInfo(id) {
+export function editParInfo(data) {
   return request({
-    url: `/company/department/${id}`,
-    method: 'put'
+    url: `/company/department/${data.id}`,
+    method: 'put',
+    data
   })
 }

@@ -138,7 +138,7 @@ export default {
           // 通过校验，可以提交了
           if (this.isEdit) {
             console.log(this.addDepartFrom)
-            await editParInfo(this.addDepartFrom.id)
+            await editParInfo(this.addDepartFrom)
           } else {
             this.addDepartFrom.pid = this.treeList.id
             await addDepartment(this.addDepartFrom)
@@ -151,7 +151,7 @@ export default {
     },
 
     async getParInfo(id) {
-      console.log(1)
+      // console.log(1)
       this.addDepartFrom = await getParInfo(id)
       // console.log(this.addDepartFrom)
     }
