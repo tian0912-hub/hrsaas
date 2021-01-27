@@ -24,8 +24,21 @@ export function getRolesInfoById(id) {
 // 根据ID修改角色信息
 export function editRolesInfoById(data) {
   return request({
-    url: `/company/department/${data.id}`,
+    url: `/sys/role/${data.id}`,
     method: 'put',
     data
+  })
+}
+// 根据ID删除角色
+export function delRolesById(id) {
+  return request({
+    url: `/sys/role/${id}`,
+    method: 'delete'
+  })
+}
+// 根据ID查询公司信息
+export function getCompanyInfoById(companyId) {
+  return request({
+    url: `/company/${companyId}`
   })
 }
