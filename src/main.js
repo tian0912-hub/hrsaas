@@ -16,6 +16,12 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import * as directives from '@/directives' // 引入自定义指令文件
 import Component from '@/components'
+import * as filters from '@/filters' // 引入工具类
+// 注册全局的过滤器
+Object.keys(filters).forEach(key => {
+  // 注册过滤器
+  Vue.filter(key, filters[key])
+})
 Vue.use(Component) // 注册自己的插件
 // 注册自定义指令
 // 遍历所有的导出的指令对象 完成自定义全局注册

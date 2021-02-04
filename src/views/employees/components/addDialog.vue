@@ -13,7 +13,11 @@
         <el-input v-model="addEmployeeForm.mobile" />
       </el-form-item>
       <el-form-item label="入职时间" prop="timeOfEntry">
-        <el-input v-model="addEmployeeForm.timeOfEntry" />
+        <el-date-picker
+          v-model="addEmployeeForm.timeOfEntry"
+          type="date"
+          placeholder="选择日期"
+        />
       </el-form-item>
       <el-form-item label="聘用形式" prop="formOfEmployment">
         <el-input v-model="addEmployeeForm.formOfEmployment" />
@@ -25,11 +29,15 @@
         <el-input v-model="addEmployeeForm.departmentName" />
       </el-form-item>
       <el-form-item label="转正时间" prop="correctionTime">
-        <el-input v-model="addEmployeeForm.correctionTime" />
+        <el-date-picker
+          v-model="addEmployeeForm.correctionTime"
+          type="date"
+          placeholder="选择日期"
+        />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="addDialogVisible = false">取 消</el-button>
+      <el-button @click="handleClose">取 消</el-button>
       <el-button type="primary" @click="addEmployeeInfo">确 定</el-button>
     </span>
   </el-dialog>
@@ -80,15 +88,40 @@ export default {
 
   methods: {
     // 监听对话框的关闭事件
-    handleClose() {},
-    // 监听确定按钮的点击事件
-    async addEmployeeInfo() {
-      const isok = this.$refs.addEmployeeRef.validate()
-      if (isok) {
-        await addEmployeeInfo(this.addEmployeeForm)
-        this.$emit('update:addDialogVisible', false)
-        this.$emit('addEmployeeInfoSuccess')
+    handleClose() {
+      this.addEmployeeForm = {
+        username: '',
+        mobile: '',
+        formOfEmployment: '',
+        workNumber: '',
+        departmentName: '',
+        timeOfEntry: '',
+        correctionTime: ''
       }
+      this.$refs.addEmployeeRef.resetFields()
+      this.$emit('update:addDialogVisible', false)
+    },
+    // 监听确定按钮的点击事件
+    addEmployeeInfo() {
+      this.$refs.addEmployeeRef.validate(async valid => {
+      // console.log(this.addEmployeeForm)
+      // console.log(valid)
+        if (valid) {
+          await addEmployeeInfo(this.addEmployeeForm)
+          this.addEmployeeForm = {
+            username: '',
+            mobile: '',
+            formOfEmployment: '',
+            workNumber: '',
+            departmentName: '',
+            timeOfEntry: '',
+            correctionTime: ''
+          }
+          this.$emit('update:addDialogVisible', false)
+          this.$message.success('新增员工成功')
+          this.$emit('addEmployeeInfoSuccess')
+        }
+      })
     }
 
   }
