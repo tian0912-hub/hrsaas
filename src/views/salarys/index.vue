@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="app-container">
-      <ImageUpload />
+      工资
     </div>
   </div>
 </template>

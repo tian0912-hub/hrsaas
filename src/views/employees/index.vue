@@ -40,11 +40,11 @@
           <el-table-column prop="enableState" label="账户状态" sortable :formatter="formateEnableState" />
           <el-table-column prop="date" label="操作" width="250" align="center">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="$router.push(`/employees/detail/${scope.row.id}`)">查看</el-button>
+              <el-button type="text" size="small" :disabled="!checkPermission('POINT-USER-UPDATE')" @click="$router.push(`/employees/detail/${scope.row.id}`)">查看</el-button>
               <el-button type="text" size="small">转正</el-button>
               <el-button type="text" size="small">调岗</el-button>
               <el-button type="text" size="small">离职</el-button>
-              <el-button type="text" size="small">角色</el-button>
+              <el-button type="text" size="small" @click="assignRoles(scope.row.id)">角色</el-button>
               <el-button type="text" size="small" @click="delEmployee(scope.row.id)">删除</el-button>
             </template>
           </el-table-column>
@@ -68,6 +68,8 @@
           <canvas ref="myCanvas" />
         </el-row>
       </el-dialog>
+      <!-- 分配角色对话框 -->
+      <assign-roles ref="assignRolesRef" :show-role-dialog.sync="showRoleDialog" :user-id="userId" />
     </div>
   </div>
 </template>
@@ -77,9 +79,11 @@ import { getEmployeeList, delEmployeeById } from '@/api/employee'
 import EmployeeEnum from '@/api/constant/employees'
 import addDialog from './components/addDialog'
 import QrCode from 'qrcode'
+import assignRoles from './components/assign-role'
 export default {
   components: {
-    addDialog
+    addDialog,
+    assignRoles
   },
   data() {
     return {
@@ -94,7 +98,10 @@ export default {
       // 新郑对话框的显示与隐藏
       addDialogVisible: false,
       // 二维码显示与隐藏
-      showCodeDialog: false
+      showCodeDialog: false,
+      // 分配角色对话框的显示与隐藏
+      showRoleDialog: false,
+      userId: null
     }
   },
   created() {
@@ -183,6 +190,12 @@ export default {
           QrCode.toCanvas(this.$refs.myCanvas, url)
         })
       }
+    },
+    // 分配角色
+    assignRoles(id) {
+      this.userId = id
+      this.$refs.assignRolesRef.getUserDetailById(id)
+      this.showRoleDialog = true
     }
   }
 

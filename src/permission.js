@@ -14,7 +14,11 @@ router.beforeEach(async(to, from, next) => {
     } else {
       // 在这里调用获取用户信息的方法，应该是登录成功之后跳转到主页中直接就已经拿到数据了，点击登录按钮时触发一系列动作，首先是登录成功，拿到token，储存token，然后触发页面跳转到主页，正好处于这里，既有token，并且to.path ='/',
       if (!store.getters.userId) {
-        await store.dispatch('user/getUserInfo')
+        const { roles: { menus }} = await store.dispatch('user/getUserInfo')
+        // 拿到用户资料之后，查找权限标识
+        const routes = await store.dispatch('permission/filterRoutes', menus)
+        router.addRoutes([...routes, { path: '*', redirect: '/404', hidden: true }])// 添加动态路由权限
+        next(to.path)
       }
       // 不去登录页就直接放行
       next()

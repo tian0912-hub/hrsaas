@@ -89,3 +89,21 @@ export function updateJob(data) {
     data
   })
 }
+/**
+ * 获取所有角色列表
+ */
+export function getRoleList() {
+  return request({
+    url: '/sys/role'
+  })
+}
+/**
+ * 给员工分配角色
+ */
+export function assignRoles(data) {
+  return request({
+    url: `/sys/user/assignRoles`,
+    method: 'put',
+    data
+  })
+}

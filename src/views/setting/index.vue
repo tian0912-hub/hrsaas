@@ -19,7 +19,7 @@
                   <el-row>
                     <el-col>
                       <!-- <div>{{ scope }}</div> -->
-                      <el-button size="small" type="success">分配权限</el-button>
+                      <el-button size="small" type="success" @click="assignRoles(scope.row.id)">分配权限</el-button>
                       <el-button size="small" type="primary" @click="editRoles(scope.row.id)">编辑</el-button>
                       <el-button size="small" type="danger" @click="delRolesById(scope.row.id)">删除</el-button>
                     </el-col>
@@ -57,6 +57,7 @@
         </el-tabs>
       </el-card>
       <addRolesDialog ref="addRolesRef" :add-rolesdialog.sync="addRolesdialog" @addRolesSuc="addRolesSuc" />
+      <assign-roles ref="assignRolesRef" :assign-show-perm-dialog.sync="assignShowPermDialog" @btnOK="addRolesSuc" />
     </div>
   </div>
 </template>
@@ -65,9 +66,12 @@
 import { getRolesList, delRolesById, getCompanyInfoById } from '@/api/setting'
 // 引入新增和修改对话框组件
 import addRolesDialog from './components/add-roles'
+// 引入分配角色对话框组件
+import assignRoles from './components/assign-roles'
 export default {
   components: {
-    addRolesDialog
+    addRolesDialog,
+    assignRoles
   },
   data() {
     return {
@@ -86,7 +90,9 @@ export default {
       // 新增与编辑对话框的显示与隐藏
       addRolesdialog: false,
       // 公司信息部分数据
-      companyForm: {}
+      companyForm: {},
+      // 分配权限对话框显示与隐藏
+      assignShowPermDialog: false
     }
   },
   created() {
@@ -117,7 +123,7 @@ export default {
     addRoles() {
       // console.log(1)
       this.addRolesdialog = true
-      console.log(this.addRolesDialog)
+      // console.log(this.addRolesDialog)
     },
     // 子组件添加操作成功，刷新数据
     addRolesSuc() {
@@ -144,6 +150,10 @@ export default {
       } else {
         this.$message.info('取消删除角色信息')
       }
+    },
+    async assignRoles(id) {
+      await this.$refs.assignRolesRef.assignRoles(id)
+      this.assignShowPermDialog = true
     }
 
   }

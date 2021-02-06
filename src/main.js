@@ -17,6 +17,8 @@ import '@/permission' // permission control
 import * as directives from '@/directives' // 引入自定义指令文件
 import Component from '@/components'
 import * as filters from '@/filters' // 引入工具类
+import checkPermission from '@/mixin/checkPermission'
+Vue.mixin(checkPermission)
 // 注册全局的过滤器
 Object.keys(filters).forEach(key => {
   // 注册过滤器

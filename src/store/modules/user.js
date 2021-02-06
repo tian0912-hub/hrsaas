@@ -1,6 +1,7 @@
 // import { set } from 'core-js/fn/dict'
 import { setToken, getToken, removeToken, setTimeStamp } from '@/utils/auth'
 import { login, getUserInfo, getUserDetailById } from '@/api/user'
+import { resetRouter } from '@/router'
 export default {
   namespaced: true,
   state: {
@@ -42,6 +43,10 @@ export default {
     logout(context) {
       context.commit('removeToken')
       context.commit('removeUserInfo')
+      // 重置路由
+      resetRouter()
+      // 设置权限模块下的路由为默认状态
+      context.commit('permission/setRoutes', [], { root: true })
     }
   }
 }
