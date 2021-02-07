@@ -43,7 +43,7 @@
   </el-dialog>
 </template>
 <script>
-import { addEmployeeInfo } from '@/api/employee'
+import { addEmployeeInfo } from '@/api/employees'
 export default {
   props: {
     addDialogVisible: {

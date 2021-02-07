@@ -47,7 +47,7 @@
 
 <script>
 import { getUserDetailById } from '@/api/user'
-import { saveEmployeeInfo } from '@/api/employee'
+import { saveEmployeeInfo } from '@/api/employees'
 import userinfo from './components/user-info'
 import jobinfo from './components/job-info'
 export default {

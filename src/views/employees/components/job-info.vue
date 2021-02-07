@@ -160,7 +160,7 @@
 </template>
 <script>
 import EmployeeEnum from '@/api/constant/employees'
-import { getJobDetail, updateJob, getEmployeeSimpleList } from '@/api/employee'
+import { getJobDetail, updateJob, getEmployeeSimpleList } from '@/api/employees'
 export default {
   data() {
     return {

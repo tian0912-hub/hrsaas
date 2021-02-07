@@ -7,6 +7,12 @@
     </div>
     <!-- <breadcrumb class="breadcrumb-container" /> -->
     <div class="right-menu">
+      <!-- 多语言 -->
+      <lang-select />
+      <!-- 颜色插件 -->
+      <theme-picker style="margin-right:10px;vertical-align:middle;height:30px;" />
+      <!-- 全屏插件 -->
+      <screen-full class="right-menu-item" />
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img v-imagerror="defaultImg" :src="staffPhoto" class="user-avatar">
@@ -80,17 +86,17 @@ export default {
   margin-left: 10px;
   color: #ffffff;
   cursor: text;
-  .breadBtn {
-    background: #84a9fe;
-    font-size: 14px;
-    padding: 0 10px;
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 10px;
-    margin-left: 15px;
+    .breadBtn {
+      background: #84a9fe;
+      font-size: 14px;
+      padding: 0 10px;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 10px;
+      margin-left: 15px;
+    }
   }
-}
 
   .hamburger-container {
     line-height: 46px;
@@ -109,7 +115,7 @@ export default {
     float: left;
   }
 
-  .right-menu {
+ .right-menu {
     float: right;
     height: 100%;
     line-height: 50px;
@@ -118,13 +124,19 @@ export default {
       outline: none;
     }
 
+   .name {
+          color: #fff;
+          vertical-align: middle;
+          margin-left:5px;
+   }
+
     .right-menu-item {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
       color: #5a5e66;
-      vertical-align: text-bottom;
+      vertical-align: middle;
 
       &.hover-effect {
         cursor: pointer;
@@ -137,6 +149,7 @@ export default {
     }
 
     .avatar-container {
+      vertical-align: center;
       margin-right: 30px;
 
       .avatar-wrapper {

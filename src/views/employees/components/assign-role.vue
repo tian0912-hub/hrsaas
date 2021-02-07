@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getRoleList, assignRoles } from '@/api/employee'
+import { getRoleList, assignRoles } from '@/api/employees'
 import { getUserDetailById } from '@/api/user'
 export default {
   props: {

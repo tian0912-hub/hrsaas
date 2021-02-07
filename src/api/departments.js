@@ -1,6 +1,12 @@
 import request from '@/utils/request'
 
 // 封装获取部门列表
+
+export function getDepartments() {
+  return request({
+    url: '/company/department'
+  })
+}
 export function getDepartmengsList() {
   return request({
     url: '/company/department'

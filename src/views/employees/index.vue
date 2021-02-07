@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { getEmployeeList, delEmployeeById } from '@/api/employee'
+import { getEmployeeList, delEmployeeById } from '@/api/employees'
 import EmployeeEnum from '@/api/constant/employees'
 import addDialog from './components/addDialog'
 import QrCode from 'qrcode'
